@@ -41,11 +41,14 @@ makeCacheMatrix <- function(m = matrix()) {
 #   stored inverse, or else calculating it and storing it
 #
 cacheSolve <- function(cacheM, ...) {
+    # check the inverse stored in the cache matrix
     inverse <- cacheM$getInverse()
     if (!is.null(inverse)) {
         print("getting cached data")
         return(inverse)
     }
+    
+    # inverse was not found, calculate it and store it
     m <- cacheM$get()
     inverse <- solve(m)
     cacheM$setInverse(inverse)
